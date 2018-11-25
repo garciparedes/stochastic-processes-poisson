@@ -9,6 +9,16 @@
 \usepackage{dirtytalk}
 
 
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\usepackage{titlesec}
+\renewcommand\thesection{\alph{section})}
+\titleformat{\section}
+{\normalfont\bfseries}{\thesection}{1.0em}{}
+
+\usepackage{csquotes}
+
 \title{Procesos Estocásticos: Ejercicios de Poisson}
 \author{
   Gabriel Rodríguez Canal \and
@@ -21,19 +31,178 @@
 
   \maketitle
 
-  \section{Ejercicio 1}
+  \section{Ejercicio 2.37 - Durret}
 
     \paragraph{}
-    [TODO]
+    El enunciado del ejercicio se indica a continuación:
+
+    \begin{displayquote}
+      \say{As a community service members of the Mu Alpha Theta fraternity are going to pick up cans from along a roadway. A Poisson mean $60$ members show up for work. Two-third of the workers are enthusiastic and will pick up a mean of ten cans with a standard deviation of $5$. One-third of the workers are lazy and will only pick up an average of three cans with a standard deviation of $2$. Find the mean and standard deviation of the the number of cans collected.}
+    \end{displayquote}
+
+    \paragraph{}
+    Lo primero es indicar la notación que utilizaremos para plantear el problema:
+
+    \begin{align*}
+      M &\equiv \text{Número de miembros que van a recoger latas en cada excursión.} \\
+      p &\equiv \text{Proporción de miembros entusiastas respecto del total.} \\
+      M_E &\equiv \text{Número de miembros entusiastas que van a recoger latas.} \\
+      M_L &\equiv \text{Número de miembros perezosos que van a recoger latas.} \\
+      E_i &\equiv \text{Número de latas recogidas por el miembro entusiastas i-ésimo} \\
+      L_j &\equiv \text{Número de latas recogidas por el miembro perezoso j-ésimo} \\
+      S &\equiv \text{Número de latas recogidas en total.} \\
+      S_E &\equiv \text{Número de latas recogidas por miembros entusiastas en total.} \\
+      S_L &\equiv \text{Número de latas recogidas por miembros perezos en total.}
+    \end{align*}
+
+    \paragraph{}
+    Además, el enunciado indica las siguientes propiedades acerca de estas variables aleatorias:
+
+    \begin{align*}
+      \lambda &= 60 \\
+      p &= \frac{2}{3} \\
+      M &\sim Poisson(\lambda) \equiv Poisson(60) \\
+      E[E_i] &= 10 \\
+      Var[E_i] &= 5 ^ 2 = 25 \\
+      E[L_j] &= 3 \\
+      Var[L_j] &= 2^2 = 4
+    \end{align*}
+
+    \paragraph{}
+    Aplicando la propiedad de \emph{thinning} sobre el número de miembros de cada tipo tenemos que:
+
+    \begin{align*}
+      M_E &\sim Poisson(p \cdot \lambda) \equiv Poisson(40) \\
+      M_L &\sim Poisson((1 - p) \cdot \lambda) \equiv Poisson(20)
+    \end{align*}
+
+    \paragraph{}
+    Además $M_E$ y $M_L$ son independientes entre si. Por tanto, podemos descomponer la suma de latas recogidas en dos subgrupos que podemos calcular por separado:
+
+    \begin{align*}
+      S = S_E + S_L
+    \end{align*}
+
+    \paragraph{}
+    Para el cálculo de esperanzas aplicamos la propiedad de la suma de $N$ variables $X_i$ \emph{i.i.d}, que indica que $E[X_1 + ... + X_N] = E[X_i] \cdot E[N]$. A continuación se muestran los cálculos pertinentes:
+
+    \begin{align*}
+      E[S_E]
+      &= E[E_i] \cdot E[M_E]\\
+      &= 10 * 40 \\
+      &= 400 \\
+      \\
+      E[S_L]
+      &= E[L_j] \cdot E[M_L] \\
+      &= 3 * 20 \\
+      &= 60 \\ 
+      \\
+      E[S]
+      &= E[S_E] + E[S_L] \\
+      &= 400 + 60 \\
+      &= 460
+    \end{align*}
+
+    \paragraph{}
+    Para el cálculo de varianzas aplicamos la propiedad de la suma de $N$ variables $X_i$ \emph{i.i.d}, que indica que $Var[X_1 + ... + X_N] = E[N] \cdot Var[X_i] + Var[N] \cdot E[X_i]^2$. A continuación se muestran los cálculos pertinentes:
+
+    \begin{align*}
+      Var[S_E]
+      &= E[M_E] \cdot Var[E_i] + Var[M_E] \cdot (E[E_i])^2 \\
+      &= 40 \cdot 25 + 40 \cdot 10 ^ 2 \\
+      &= 5000\\
+      \\
+      Var[S_L]
+      &= E[M_L] \cdot Var[L_j] + Var[M_L] \cdot (E[L_j])^2 \\
+      &= 20  \cdot 4 + 20 \cdot 3 ^ 2\\
+      &= 260 \\ 
+      \\
+      Var[S]
+      &= Var[S_E] + Var[S_L] \\
+      &= 5000 + 260 \\
+      &= 5260
+      \\
+      SD[S]
+      &= \sqrt{Var[S]} \\
+      &= \sqrt{5260} \\
+      &\approx 72.5
+    \end{align*}
+
+    \paragraph{}
+    Por tanto, la solución al ejercicio es la siguiente: \textbf{En promedio, se recogen $460$ latas, con una desviación estándar de $72.5$ latas aproximadamente}.
 
   \section{Ejercicio 2}
 
     \paragraph{}
     [TODO]
 
-  \section{Ejercicio 3}
+  \section{Ejercicio 2.60 - Durret}
 
     \paragraph{}
-    [TODO]
+    El enunciado del ejercicio se indica a continuación:
+
+
+    \begin{displayquote}
+      \say{Suppose that the number of calls per hour to an answering service follows a Poisson process with rate 4. Suppose that 3/4’s of the calls are made by men, 1/4 by women, and the sex of the caller is independent of the time of the call. (a) What is the probability that in 1 h exactly two men and three women will call the answering service? (b) What is the probability three men will make phone calls before three women do?}
+    \end{displayquote}
+
+
+    \paragraph{}
+    Lo primero es indicar la notación que utilizaremos para plantear el problema:
+
+    \begin{align*}
+      C &\equiv \text{Número de llamadas por hora.} \\
+      p &\equiv \text{Proporción de hombres respecto del total.} \\
+      C_H &\equiv \text{Número de miembros entusiastas que van a recoger latas.} \\
+      C_M &\equiv \text{Número de miembros perezosos que van a recoger latas.}
+    \end{align*}
+
+    \paragraph{}
+    Además, el enunciado indica las siguientes propiedades acerca de estas variables aleatorias:
+
+    \begin{align*}
+      \lambda &= 4 \\
+      p &= \frac{3}{4} \\
+      C &\sim Poisson(\lambda) \equiv Poisson(4)
+    \end{align*}
+
+    \paragraph{}
+    Aplicando la propiedad de \emph{thinning} sobre el número de miembros de cada tipo tenemos que:
+
+    \begin{align*}
+      C_H &\sim Poisson(p \cdot \lambda) \equiv Poisson(3) \\
+      C_M &\sim Poisson((1 - p) \cdot \lambda) \equiv Poisson(1)
+    \end{align*}
+
+    \paragraph{}
+    Aplicando la propiedad de independencia $P(A, B) = P(A) \cdot P(B)$ calculamos la probabilidad conjunta de que llamen exactamente $2$ hombres y $3$ mujeres. Los cálculos se muestran a continuación:
+
+    \begin{align*}
+      P(C_H = 2, C_M = 3)
+      &= P(C_H = 2) \cdot P(C_M = 3) \\
+      &= \frac{e^{-3} \cdot 3^2}{2!} \cdot \frac{e^{-1} \cdot 1^3}{3!} \\
+      &\approx 0.0137
+    \end{align*}
+
+    \paragraph{}
+    Por tanto, la solución al apartado (a) del ejercicio es la siguiente: \textbf{La probabilidad de que en una hora llamen exactamente $2$ hombres y $3$ mujeres es de $0.0137$ approximadamente.}.
+
+    \paragraph{}
+    Para el apartado (b), vamos a aplicar la propiedad que indica que cuando se fija el número de sucesos posibles en un proceso de Poisson, entonces el número de casos favorables se puede probabilizar a partir de la distribución Binomial. La justificación es la siguiente:
+
+    \paragraph{}
+    Si  estudiamos 2 procesos $N_1 \sim Poisson(\lambda_1)$, $N_2 \sim Poisson(\lambda_2)$ independientes, considerando $N_1$ como casos favorables y $N_2$ como casos desfavorables, al fijar el número de casos totales en $n$, entonces la distribucion $Y \sim Bin\left(n, \frac{\lambda_1}{\lambda_1 + \lambda_2}\right)$ permite estudiar el número de casos favorables obtenidos.
+
+    \paragraph{}
+    Por tanto, para nuestro caso particular definimos $X \sim Bin\left(5, \frac{3}{4}\right)$ dado que el suceso de que llamen $3$ hombres antes que $3$ mujeres se da estudiando $5$ llamadas consecutivas y la proporción de llamadas realizadas por hombres es de $\frac{3}{4}$.
+
+    \begin{align*}
+      P(X \geq 3)
+      &= \sum_{i = 3}^6 \binom{6}{k} \cdot \left(\frac{3}{4} \right)^k \cdot \left(1 - \frac{3}{4}\right) ^ {6 - k} \\
+      &\approx 0.633
+    \end{align*}
+
+    \paragraph{}
+    Por tanto, la solución al apartado (b) del ejercicio es la siguiente: \textbf{La probabilidad de que lleguen $3$ llamadas realizadas por hombres antes que $3$ llamadas realizadas por mujeres es de $0.633$ approximadamente.}.
 
 \end{document}
