@@ -13,7 +13,7 @@
 \usepackage{amssymb}
 
 \usepackage{titlesec}
-\renewcommand\thesection{\alph{section})}
+\renewcommand\thesection{(\alph{section})}
 \titleformat{\section}
 {\normalfont\bfseries}{\thesection}{1.0em}{}
 
@@ -108,12 +108,12 @@
 
     \begin{align*}
       Var[S_E]
-      &= E[M_E] \cdot Var[E_i] + Var[M_E] \cdot (E[E_i])^2 \\
+      &= E[M_E] \cdot Var[E_i] + Var[M_E] \cdot E[E_i]^2 \\
       &= 40 \cdot 25 + 40 \cdot 10 ^ 2 \\
       &= 5000\\
       \\
       Var[S_L]
-      &= E[M_L] \cdot Var[L_j] + Var[M_L] \cdot (E[L_j])^2 \\
+      &= E[M_L] \cdot Var[L_j] + Var[M_L] \cdot E[L_j]^2 \\
       &= 20  \cdot 4 + 20 \cdot 3 ^ 2\\
       &= 260 \\ 
       \\
@@ -177,6 +177,7 @@
     &\approx 66. 6
   \end{align*}
 
+  \paragraph{}
   Por tanto, la solución al apartado (a) es la siguiente: \textbf{La bombilla se cambia en promedio cada 66.6 días aproximadamente}.
 
   \paragraph{}
@@ -189,7 +190,8 @@
     &= \frac{1}{3}
   \end{align*}
 
-    Por tanto, la solución al apartado (b) es la siguiente: \textbf{La probabilidad de que se funda la bombilla antes de que la cambien es de $\frac{1}{3}$}.
+  \paragraph{}
+  Por tanto, la solución al apartado (b) es la siguiente: \textbf{La probabilidad de que se funda la bombilla antes de que la cambien es de $\frac{1}{3}$}.
 
 
   \section{Ejercicio 2.60 - Durret}
@@ -197,11 +199,9 @@
     \paragraph{}
     El enunciado del ejercicio se indica a continuación:
 
-
     \begin{displayquote}
       \say{Suppose that the number of calls per hour to an answering service follows a Poisson process with rate 4. Suppose that 3/4’s of the calls are made by men, 1/4 by women, and the sex of the caller is independent of the time of the call. (a) What is the probability that in 1 h exactly two men and three women will call the answering service? (b) What is the probability three men will make phone calls before three women do?}
     \end{displayquote}
-
 
     \paragraph{}
     Lo primero es indicar la notación que utilizaremos para plantear el problema:
